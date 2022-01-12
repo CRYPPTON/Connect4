@@ -1,0 +1,47 @@
+.game-board {
+  display: grid;
+  background-color: grey;
+  height: 600px;
+  width: 700px;
+
+  @media only screen and (max-width: 900px) {
+    grid-template-columns: repeat(1, 1fr);
+    height: 500px;
+    width: 583px;
+  }
+
+  @media only screen and (max-width: 700px) {
+    grid-template-columns: repeat(1, 1fr);
+    height: 300px;
+    width: 350px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+    height: 260px;
+    width: 303px;
+  }
+}
+
+
+// board
+
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  font-weight: 900;
+  border-radius: 50%;
+
+  border: solid 1px black;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
