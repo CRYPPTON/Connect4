@@ -6,7 +6,7 @@
     "new-game": "New Game"
   },
   "dialogMessage": {
-    "win": "You win!",
+    "win": "win!",
     "draw": "Draw!",
     "unknown": "An unknown Error occurred!"
   },

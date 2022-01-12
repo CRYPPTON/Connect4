@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameEngineService } from '@app-services';
+import { GamePlayer } from '@app-enums';
 
 @Component({
   selector: 'app-game-board',
@@ -9,19 +11,35 @@ export class GameBoardComponent implements OnInit {
 
   //#region Class properties
 
-  columns: number;
-  rows: number;
+  movesRed: number;
+  movesYellow: number;
+
+  get board(): Array<GamePlayer[]> {
+    return this.gameEngineService.board;
+  }
+
+  get columns(): number {
+    return this.gameEngineService.columns;
+  };
+
+  get rows(): number {
+    return this.gameEngineService.rows;
+  };
 
   //#endregion
 
-  constructor() { }
+  constructor(private gameEngineService: GameEngineService) { }
+
+  //#region Life Cycle hooks
 
   ngOnInit(): void {
-    this.columns = 7  ;
-    this.rows = 6;
+    this.movesRed = 0;
+    this.movesYellow = 0;
 
     this.setBorderSize();
   }
+
+  //#endregion
 
   /**
   * Set game board size.
@@ -31,5 +49,13 @@ export class GameBoardComponent implements OnInit {
     element.style.gridTemplateColumns = `repeat(${this.columns}, 1fr)`;
     element.style.gridTemplateRows = `repeat(${this.rows}, 1fr)`
   }
+
+  //#region
+
+  public onPlay(column: number): void {
+    this.gameEngineService.play(column);
+  }
+
+  //#endregion
 
 }
