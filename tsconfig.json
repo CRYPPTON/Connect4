@@ -19,7 +19,27 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app-enums": [
+        "src/app/shared/enums/"
+      ],
+      "@app-models": [
+        "src/app/shared/models/"
+      ],
+      "@app-services": [
+        "src/app/core/services/"
+      ],
+      "@app-directives": [
+        "src/app/core/directives/"
+      ],
+      "@app-pipes": [
+        "src/app/core/pipe/"
+      ],
+      "@app-popup-handlers": [
+        "src/app/core/popup-handlers/"
+      ]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
