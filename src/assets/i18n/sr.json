@@ -1,6 +1,13 @@
 {
   "title": "Povezi4",
   "button": {
-    "test": "test"
+    "test": "test",
+    "yes": "Da",
+    "no" : "Ne"
+  },
+  "dialogMessage": {
+    "win": "Pobeda!",
+    "draw": "Nereseno!",
+    "unknown": "An unknown Error occured!"
   }
 }

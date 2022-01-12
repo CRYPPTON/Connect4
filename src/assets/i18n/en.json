@@ -1,6 +1,13 @@
 {
   "title": "Connect4",
   "button": {
-    "test": "test"
+    "test": "test",
+    "yes": "Yes",
+    "no" : "No"
+  },
+  "dialogMessage": {
+    "win": "You win!",
+    "draw": "Draw!",
+    "unknown": "An unknown Error occured!"
   }
 }

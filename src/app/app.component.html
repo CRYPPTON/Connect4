@@ -2,5 +2,5 @@
 <h1 class="d-flex justify-content-center">{{"title" | translate}}</h1>
 
 <!-- test material -->
-<button mat-raised-button color="warn">{{"button.test" | translate}}</button>
+<button mat-raised-button color="warn" (click)="onOpenDialog()">{{"button.test" | translate}}</button>
 <router-outlet></router-outlet>
