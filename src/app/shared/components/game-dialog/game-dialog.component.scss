@@ -1,0 +1,26 @@
+.game-dialog {
+  width: 250px;
+  height: 150px;
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: green;
+}
+
+.draw-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color:  rgb(189, 189, 6);
+}
+
+.failure-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: red;
+}
