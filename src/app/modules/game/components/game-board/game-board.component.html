@@ -1,0 +1,13 @@
+<div class="game-board">
+  <!-- create game board -->
+  <ng-container
+    *ngFor="let row of [].constructor(columns); let i = index"
+  >
+    <ng-container
+      *ngFor="let field of [].constructor(rows); let j = index"
+    >
+      <!-- single board field -->
+      <div class="field" matRipple>{{i}}, {{j}}</div>
+    </ng-container>
+  </ng-container>
+</div>

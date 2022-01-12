@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GameDialogComponent } from 'src/app/shared/components/game-dialog/game-dialog.component';
-import { DialogType } from 'src/app/shared/enums/dialog-type';
+import { DialogType } from '@app-enums';
 
 @Injectable({
   providedIn: 'root'
