@@ -34,9 +34,11 @@ export class GameEngineService {
 
     this.setPlayerOnBoard(column);
 
-    this.checkGameWinner(column);
+    if (this.slectedRow >= 0) {
+      this.checkGameWinner(column);
+      this.changePlayer();
+    }
 
-    this.changePlayer();
   }
 
   /**
@@ -66,6 +68,8 @@ export class GameEngineService {
         this.slectedRow = i;
         this.board[i][column] = this.currentPlayer;
         break;
+      } else {
+        this.slectedRow = -1;
       }
     }
   }
