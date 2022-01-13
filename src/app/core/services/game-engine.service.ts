@@ -14,8 +14,11 @@ export class GameEngineService {
   rows: number;
   currentPlayer: GamePlayer;
   slectedRow: number;
-  board: Array<GamePlayer[]>
-  winner: GamePlayer;
+  board: Array<GamePlayer[]>;
+  winner: GamePlayer | undefined;
+  gameOver: boolean;
+  redMoves: number;
+  yellowMoves: number;
 
   //#endregion
 
@@ -43,7 +46,10 @@ export class GameEngineService {
   public initGame(): void {
     this.columns = 7;
     this.rows = 6;
-
+    this.redMoves = 0;
+    this.yellowMoves = 0;
+    this.gameOver = false;
+    this.winner = undefined;
     this.currentPlayer = GamePlayer.RED;
 
     this.createBoard();
@@ -86,20 +92,49 @@ export class GameEngineService {
     this.board = board;
   }
 
+  /**
+   * Show win dialog.
+   */
+  public showWinner = async (): Promise<void> => {
+    const result = await this.dialogService.showDialog(
+      this.translationService.instant("dialogMessage.win"),
+      this.winner,
+      DialogType.success);
+
+    if (result) {
+      this.initGame();
+    } else {
+      console.log(result);
+      this.gameOver = true;
+    }
+  }
+
   //#endregion
 
   //#region Check game methods
 
   private checkGameWinner(column: number): void {
+    this.checkSecondaryDiagonal(column);
+    this.checkDiagonal(column);
     this.checkVertical(column);
     this.checkHorizontal(column);
+
+    if (this.winner) {
+      this.showWinner();
+    }
+
+    if(this.currentPlayer == GamePlayer.RED) {
+      this.redMoves++;
+    } else {
+      this.yellowMoves++;
+    }
   }
 
   /**
    * Check winner for vertical.
    * @param column selected column.
    */
-  private checkVertical = async (column: number): Promise<void> => {
+  private checkVertical(column: number): void {
     let count = 0;
 
     if ((this.rows - this.slectedRow + 1) > 4) {
@@ -110,23 +145,103 @@ export class GameEngineService {
       }
     }
     if (count == 4) {
-      this.winner = this.board[this.slectedRow][column];
-      const result = await this.dialogService.showDialog(
-        this.translationService.instant("dialogMessage.win"),
-        this.winner,
-        DialogType.success)
-
-      if (result) {
-        this.initGame();
-      }
-
+      this.winner = this.currentPlayer;
     }
 
   }
 
+  /**
+   * Check winner for horizontal.
+   * @param column selected column.
+   */
   private checkHorizontal(column: number): void {
-    //...
+    let count = 0;
+    let start = column + 3;
+
+    for (let i = 0; i < 4; i++) {
+      count = 0;
+      for (let j = start - i; j > start - i - 4; j--) {
+        if (this.board[this.slectedRow][column] === this.board[this.slectedRow][j]) {
+          count++;
+        }
+        if (j === 0 || j >= this.columns) {
+          break;
+        }
+      }
+      if (count == 4) {
+        this.winner = this.currentPlayer;
+        break;
+      }
+    }
   }
+
+  /**
+   * Check winner for diagonal.
+   * @param column selected column.
+   */
+  private checkDiagonal(column: number): void {
+    let count = 0;
+    let step = 0;
+    let start = column - 3;
+    let currentRow;
+
+    for (let i = start; i < start + 4; i++) {
+      count = 0;
+      for (let j = 0; j < 4; j++) {
+
+        currentRow = this.slectedRow + 3 - j - step;
+
+        if (i + j >= this.columns || i + j < 0 || currentRow > this.rows - 1 ||
+          currentRow < 0
+        ) {
+          break;
+        }
+        if (this.board[this.slectedRow][column] === this.board[currentRow][i + j]) {
+          count++;
+        }
+
+      }
+      if (count == 4) {
+        this.winner = this.currentPlayer;
+        break;
+      }
+      step++;
+    }
+  }
+
+  /**
+   * Check winner for secondary diagonal.
+   * @param column selected column.
+   */
+  private checkSecondaryDiagonal(column: number): void {
+    let count = 0;
+    let step = 0;
+    let start = column - 3;
+    let currentRow;
+
+    for (let i = start; i < start + 4; i++) {
+      count = 0;
+      for (let j = 0; j < 4; j++) {
+
+        currentRow = this.slectedRow - 3 + j + step;
+
+        if (i + j >= this.columns || i + j < 0 || currentRow > this.rows - 1 ||
+          currentRow < 0) {
+          break;
+        }
+        if (this.board[this.slectedRow][column] === this.board[currentRow][i + j]) {
+          count++;
+        }
+
+      }
+      if (count == 4) {
+        this.winner = this.currentPlayer;
+        break;
+      }
+      step++;
+    }
+  }
+
 
   //#endregion
 
