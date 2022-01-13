@@ -110,7 +110,7 @@ export class GameEngineService {
 
   //#endregion
 
-  //#region Check game methods
+  //#region Check game result
 
   private checkGameWinner(column: number): void {
     this.checkSecondaryDiagonal(column);
@@ -118,11 +118,13 @@ export class GameEngineService {
     this.checkVertical(column);
     this.checkHorizontal(column);
 
+    this.checkDraw();
+
     if (this.winner) {
       this.showWinner();
     }
 
-    if(this.currentPlayer == GamePlayer.RED) {
+    if (this.currentPlayer == GamePlayer.RED) {
       this.redMoves++;
     } else {
       this.yellowMoves++;
@@ -238,6 +240,29 @@ export class GameEngineService {
         break;
       }
       step++;
+    }
+  }
+
+  private checkDraw = async (): Promise<void> => {
+    let count = 0;
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
+        if (!this.board[i][j]) {
+          count++;
+        }
+      }
+    }
+    if (count == 0 && this.winner == undefined) {
+      const result = await this.dialogService.showDialog(
+        this.translationService.instant("dialogMessage.draw"),
+        undefined,
+        DialogType.draw);
+
+      if (result) {
+        this.initGame();
+      } else {
+        this.gameOver = true;
+      }
     }
   }
 
