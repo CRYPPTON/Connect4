@@ -13,5 +13,7 @@
   "game-content": {
     "move-number": "Broj poteza",
     "on-move": "Na potezu"
-  }
+  },
+  "red": "crveni",
+  "yellow": "zuti"
 }

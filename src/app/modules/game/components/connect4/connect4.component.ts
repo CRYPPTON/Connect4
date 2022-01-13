@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GamePlayer } from '@app-enums';
 import { GameEngineService } from 'src/app/core/services';
 
@@ -14,6 +14,18 @@ export class Connect4Component {
   get currentPlayer(): GamePlayer {
     return this.gameEngineServices.currentPlayer;
   };
+
+  get redMoves(): number {
+    return this.gameEngineServices.redMoves;
+  }
+
+  get yellowMoves(): number {
+    return this.gameEngineServices.yellowMoves;
+  }
+
+  get player(): typeof GamePlayer {
+    return GamePlayer;
+  }
 
   //#endregion
 

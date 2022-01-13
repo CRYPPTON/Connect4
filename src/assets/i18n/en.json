@@ -13,5 +13,7 @@
   "game-content": {
     "move-number": "Number of moves",
     "on-move": "On move"
-  }
+  },
+  "red": "red",
+  "yellow": "yellow"
 }

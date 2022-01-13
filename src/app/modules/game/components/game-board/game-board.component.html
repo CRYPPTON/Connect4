@@ -3,8 +3,9 @@
   <ng-container *ngFor="let row of [].constructor(rows); let i = index">
     <ng-container *ngFor="let field of [].constructor(columns); let j = index">
       <!-- single board field -->
-      <div
+      <button
         (click)="onPlay(j)"
+        [disabled]="gameOver"
         class="field"
         [ngClass]="
           this.board[i][j] === 'red'
@@ -14,7 +15,7 @@
             : ''
         "
         matRipple
-      ></div>
+      >{{i}},{{j}}</button>
     </ng-container>
   </ng-container>
 </div>

@@ -26,6 +26,10 @@ export class GameBoardComponent implements OnInit {
     return this.gameEngineService.rows;
   };
 
+  get gameOver(): boolean {
+    return this.gameEngineService.gameOver;
+  }
+
   //#endregion
 
   constructor(private gameEngineService: GameEngineService) { }

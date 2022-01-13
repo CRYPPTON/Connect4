@@ -1,12 +1,18 @@
 <div class="d-flex justify-content-center">
   <div class="connect4-game">
     <div class="header">
-      <div>{{ "game-content.move-number" | translate }}:</div>
+      <div>
+        {{ "game-content.move-number" | translate }}
+        {{ player.RED | translate }}: {{ redMoves }}
+      </div>
       <div class="title">
         {{ "game-content.on-move" | translate }}
         <span [ngClass]="currentPlayer === 'red' ? 'red' : 'yellow'"></span>
       </div>
-      <div>{{ "game-content.move-number" | translate }}:</div>
+      <div>
+        {{ "game-content.move-number" | translate }}
+        {{ player.YELLOW | translate }}: {{ yellowMoves }}
+      </div>
     </div>
     <app-game-board></app-game-board>
     <div class="btns d-flex justify-content-center p-2">

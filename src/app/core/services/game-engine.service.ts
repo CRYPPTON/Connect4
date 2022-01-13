@@ -104,7 +104,6 @@ export class GameEngineService {
     if (result) {
       this.initGame();
     } else {
-      console.log(result);
       this.gameOver = true;
     }
   }
@@ -241,7 +240,6 @@ export class GameEngineService {
       step++;
     }
   }
-
 
   //#endregion
 
