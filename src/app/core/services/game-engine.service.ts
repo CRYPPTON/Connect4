@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogType, GamePlayer } from 'src/app/shared/enums';
-import { DialogService } from '.';
+import { DialogType, GamePlayer } from '@app-enums';
+import { GamePopupHandlerError } from '../popups-handlers';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,6 @@ export class GameEngineService {
   //#endregion
 
   constructor(
-    private dialogService: DialogService,
     private translationService: TranslateService
   ) {
     this.initGame();
@@ -44,6 +43,7 @@ export class GameEngineService {
    * Initialization game properties.
    */
   public initGame(): void {
+
     this.columns = 7;
     this.rows = 6;
     this.redMoves = 0;
@@ -92,22 +92,6 @@ export class GameEngineService {
     this.board = board;
   }
 
-  /**
-   * Show win dialog.
-   */
-  public showWinner = async (): Promise<void> => {
-    const result = await this.dialogService.showDialog(
-      this.translationService.instant("dialogMessage.win"),
-      this.winner,
-      DialogType.success);
-
-    if (result) {
-      this.initGame();
-    } else {
-      this.gameOver = true;
-    }
-  }
-
   //#endregion
 
   //#region Check game result
@@ -121,7 +105,9 @@ export class GameEngineService {
     this.checkDraw();
 
     if (this.winner) {
-      this.showWinner();
+      throw new GamePopupHandlerError(
+        this.translationService.instant("dialogMessage.win"),
+        DialogType.success)
     }
 
     if (this.currentPlayer == GamePlayer.RED) {
@@ -243,7 +229,10 @@ export class GameEngineService {
     }
   }
 
-  private checkDraw = async (): Promise<void> => {
+  /**
+   * Check for draw.
+   */
+  private checkDraw(): void {
     let count = 0;
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
@@ -253,16 +242,10 @@ export class GameEngineService {
       }
     }
     if (count == 0 && this.winner == undefined) {
-      const result = await this.dialogService.showDialog(
+      throw new GamePopupHandlerError(
         this.translationService.instant("dialogMessage.draw"),
-        undefined,
-        DialogType.draw);
-
-      if (result) {
-        this.initGame();
-      } else {
-        this.gameOver = true;
-      }
+        DialogType.draw
+      );
     }
   }
 

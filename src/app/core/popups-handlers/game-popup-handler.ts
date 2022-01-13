@@ -10,21 +10,25 @@ export class GamePopupHandler implements ErrorHandler {
     private dialogService: DialogService,
     private translationService: TranslateService,
     private gameEngineService: GameEngineService
-  ) {}
+  ) { }
 
-  handleError(error: any): void {
-    // if (error instanceof GamePopupHandlerError) {
-    //   this.dialogService.showDialog(
-    //     error.message,
-    //     this.gameEngineService.winner,
-    //     (error as GamePopupHandlerError).dialogType
-    //   );
-    // } else {
-    //   // this.dialogService.showDialog(
-    //   //   this.translationService.instant('dialogMessage.unknown'),
-    //   //   this.gameEngineService.winner,
-    //   //   DialogType.unknown
-    //   // );
-    // }
+  handleError = async (error: any): Promise<void> => {
+    if (error instanceof GamePopupHandlerError) {
+      const result = await this.dialogService.showDialog(
+        error.message,
+        (error as GamePopupHandlerError).dialogType,
+        this.gameEngineService.winner,
+      );
+      if (result) {
+        this.gameEngineService.initGame();
+      } else {
+        this.gameEngineService.gameOver = true;
+      }
+    } else {
+      this.dialogService.showDialog(
+        this.translationService.instant('dialogMessage.unknown'),
+        DialogType.unknown
+      );
+    }
   }
 }

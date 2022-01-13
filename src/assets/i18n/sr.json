@@ -3,7 +3,8 @@
   "button": {
     "yes": "Da",
     "no" : "Ne",
-    "new-game": "Nova Igra"
+    "new-game": "Nova Igra",
+    "ok": "U redu"
   },
   "dialogMessage": {
     "win": "Pobeda!",

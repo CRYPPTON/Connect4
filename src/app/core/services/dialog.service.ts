@@ -10,7 +10,7 @@ export class DialogService {
 
   constructor(public dialog: MatDialog) { }
 
-  public showDialog(message: string, player: GamePlayer | undefined, dialogType: DialogType): Promise<boolean> {
+  public showDialog(message: string, dialogType: DialogType, player?: GamePlayer): Promise<boolean> {
     const dialogPromise = this.dialog.open(GameDialogComponent, {
       data: {
         message: message,

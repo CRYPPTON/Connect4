@@ -3,7 +3,8 @@
   "button": {
     "yes": "Yes",
     "no" : "No",
-    "new-game": "New Game"
+    "new-game": "New Game",
+    "ok": "OK"
   },
   "dialogMessage": {
     "win": "win!",
