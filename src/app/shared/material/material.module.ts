@@ -5,12 +5,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatRippleModule } from '@angular/material/core';
 
 const ngModules = [
   MatButtonModule,
   MatDialogModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatRippleModule
 ];
 
 @NgModule({

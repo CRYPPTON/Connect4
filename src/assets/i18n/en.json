@@ -1,13 +1,20 @@
 {
   "title": "Connect4",
   "button": {
-    "test": "test",
     "yes": "Yes",
-    "no" : "No"
+    "no" : "No",
+    "new-game": "New Game",
+    "ok": "OK"
   },
   "dialogMessage": {
-    "win": "You win!",
+    "win": "win!",
     "draw": "Draw!",
-    "unknown": "An unknown Error occured!"
-  }
+    "unknown": "An unknown Error occurred!"
+  },
+  "game-content": {
+    "move-number": "Number of moves",
+    "on-move": "On move"
+  },
+  "red": "red",
+  "yellow": "yellow"
 }

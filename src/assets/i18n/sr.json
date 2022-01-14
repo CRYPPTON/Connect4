@@ -1,13 +1,20 @@
 {
   "title": "Povezi4",
   "button": {
-    "test": "test",
     "yes": "Da",
-    "no" : "Ne"
+    "no" : "Ne",
+    "new-game": "Nova Igra",
+    "ok": "U redu"
   },
   "dialogMessage": {
     "win": "Pobeda!",
     "draw": "Nereseno!",
-    "unknown": "An unknown Error occured!"
-  }
+    "unknown": "Nepoznata greska!"
+  },
+  "game-content": {
+    "move-number": "Broj poteza",
+    "on-move": "Na potezu"
+  },
+  "red": "crveni",
+  "yellow": "zuti"
 }

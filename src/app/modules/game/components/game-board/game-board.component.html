@@ -1,0 +1,21 @@
+<div class="game-board">
+  <!-- create game board -->
+  <ng-container *ngFor="let row of [].constructor(rows); let i = index">
+    <ng-container *ngFor="let field of [].constructor(columns); let j = index">
+      <!-- single board field -->
+      <button
+        (click)="onPlay(j)"
+        [disabled]="gameOver"
+        class="field"
+        [ngClass]="
+          this.board[i][j] === 'red'
+            ? 'red'
+            : this.board[i][j] === 'yellow'
+            ? 'yellow'
+            : ''
+        "
+        matRipple
+      ></button>
+    </ng-container>
+  </ng-container>
+</div>

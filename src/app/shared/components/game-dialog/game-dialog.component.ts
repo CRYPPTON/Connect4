@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameDialogType } from '@app-models';
+import { DialogType } from '../../enums';
 
 @Component({
   selector: 'app-game-dialog',
@@ -13,6 +14,10 @@ export class GameDialogComponent {
 
   public icon: string;
   public styleClass: string;
+
+  get dialogType(): typeof DialogType {
+    return DialogType;
+  }
 
   //#endregion
 
